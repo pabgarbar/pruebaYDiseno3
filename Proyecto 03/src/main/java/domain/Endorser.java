@@ -3,11 +3,15 @@ package domain;
 
 import java.util.List;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 @Entity
+@Access(AccessType.PROPERTY)
 public class Endorser extends Actor {
 
 	private Score				score;
@@ -15,6 +19,7 @@ public class Endorser extends Actor {
 
 
 	@Valid
+	@OneToMany
 	public List<Endorsment> getEndorsment() {
 		return this.endorsment;
 	}
