@@ -25,7 +25,7 @@ import org.hibernate.validator.constraints.NotBlank;
 @Access(AccessType.PROPERTY)
 public class FixUpTask extends DomainEntity {
 
-	private String					ticket;
+	private String					ticker;
 	private Date					momentPublished;
 	private String					description;
 	private String					address;
@@ -42,12 +42,12 @@ public class FixUpTask extends DomainEntity {
 	@NotBlank
 	@Pattern(regexp = "[0-9]{2}[0-1]{1}[0-2]{1}[0-9]{2}(_[A-Za-z0-9]{6})")
 	@Column(unique = true)
-	public String getTicket() {
-		return this.ticket;
+	public String getTicker() {
+		return this.ticker;
 	}
 
-	public void setTicket(final String ticket) {
-		this.ticket = ticket;
+	public void setTicker(final String ticker) {
+		this.ticker = ticker;
 	}
 
 	@NotNull
