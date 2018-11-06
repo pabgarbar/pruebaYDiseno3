@@ -4,17 +4,25 @@ package domain;
 import java.util.Collection;
 import java.util.Date;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import javax.xml.datatype.Duration;
 
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
+@Access(AccessType.PROPERTY)
 public class FixUpTask extends DomainEntity {
 
 	private String					ticket;
@@ -22,7 +30,7 @@ public class FixUpTask extends DomainEntity {
 	private String					description;
 	private String					address;
 	private double					maxPrice;
-	private Duration				realizationTime;
+	private int						realizationTime;
 
 	private Application				application;
 	private Collection<Category>	categories;
@@ -33,6 +41,7 @@ public class FixUpTask extends DomainEntity {
 
 	@NotBlank
 	@Pattern(regexp = "[0-9]{2}[0-1]{1}[0-2]{1}[0-9]{2}(_[A-Za-z0-9]{6})")
+	@Column(unique = true)
 	public String getTicket() {
 		return this.ticket;
 	}
@@ -42,6 +51,7 @@ public class FixUpTask extends DomainEntity {
 	}
 
 	@NotNull
+	@Temporal(TemporalType.TIMESTAMP)
 	public Date getMomentPublished() {
 		return this.momentPublished;
 	}
@@ -80,15 +90,16 @@ public class FixUpTask extends DomainEntity {
 	}
 
 	@NotNull
-	public Duration getRealizationTime() {
+	public int getRealizationTime() {
 		return this.realizationTime;
 	}
 
-	public void setRealizationTime(final Duration realizationTime) {
+	public void setRealizationTime(final int realizationTime) {
 		this.realizationTime = realizationTime;
 	}
 
 	@NotNull
+	@OneToOne(optional = false)
 	public Application getApplication() {
 		return this.application;
 	}
@@ -98,6 +109,7 @@ public class FixUpTask extends DomainEntity {
 	}
 
 	@NotBlank
+	@OneToMany
 	public Collection<Category> getCategories() {
 		return this.categories;
 	}
@@ -107,6 +119,7 @@ public class FixUpTask extends DomainEntity {
 	}
 
 	@Valid
+	@OneToMany(cascade = CascadeType.ALL)
 	public Collection<Phase> getPhases() {
 		return this.phases;
 	}
@@ -116,6 +129,7 @@ public class FixUpTask extends DomainEntity {
 	}
 
 	@NotBlank
+	@OneToMany
 	public Collection<Warranty> getWarranties() {
 		return this.warranties;
 	}
@@ -125,6 +139,7 @@ public class FixUpTask extends DomainEntity {
 	}
 
 	@Valid
+	@OneToMany(cascade = CascadeType.ALL)
 	public Collection<Complaint> getComplaints() {
 		return this.complaints;
 	}
