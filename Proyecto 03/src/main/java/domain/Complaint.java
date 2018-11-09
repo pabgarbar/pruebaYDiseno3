@@ -4,6 +4,8 @@ package domain;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -12,6 +14,7 @@ import javax.validation.constraints.Past;
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
+@Access(AccessType.PROPERTY)
 public class Complaint extends DomainEntity {
 
 	private String			ticker;
