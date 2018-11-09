@@ -12,7 +12,6 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.URL;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -42,7 +41,6 @@ public class Section extends DomainEntity {
 		this.text = text;
 	}
 
-	@URL
 	@ElementCollection(targetClass = String.class)
 	public List<String> getSectionPictures() {
 		return this.sectionPictures;
