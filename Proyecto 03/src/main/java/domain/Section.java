@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -15,7 +16,7 @@ import org.hibernate.validator.constraints.URL;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Section {
+public class Section extends DomainEntity {
 
 	private String			sectionTitle;
 	private String			text;
@@ -42,6 +43,7 @@ public class Section {
 	}
 
 	@URL
+	@ElementCollection(targetClass = String.class)
 	public List<String> getSectionPictures() {
 		return this.sectionPictures;
 	}

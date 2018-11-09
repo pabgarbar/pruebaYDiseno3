@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
@@ -17,11 +18,9 @@ import javax.validation.constraints.Past;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.URL;
 
-import com.lowagie.text.Section;
-
 @Entity
 @Access(AccessType.PROPERTY)
-public class Tutorial {
+public class Tutorial extends DomainEntity {
 
 	private String			title;
 	private Date			lastUpdate;
@@ -30,6 +29,8 @@ public class Tutorial {
 
 	private List<Section>	sections;
 
+
+	//Use of @OneToMany or @ManyToMany targeting an unmapped class: domain.Tutorial.section
 
 	@NotBlank
 	public String getTitle() {
@@ -61,6 +62,7 @@ public class Tutorial {
 	}
 
 	@URL
+	@ElementCollection
 	public List<String> getPictures() {
 		return this.pictures;
 	}

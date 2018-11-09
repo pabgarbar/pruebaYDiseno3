@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.validation.Valid;
 
@@ -42,6 +43,7 @@ public class MiscellaneousRecord extends DomainEntity {
 	}
 
 	@Valid
+	@ElementCollection(targetClass = String.class)
 	public List<String> getComments() {
 		return this.comments;
 	}
