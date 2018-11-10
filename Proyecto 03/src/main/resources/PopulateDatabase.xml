@@ -57,6 +57,184 @@
 		</property>
 	</bean>
 	
-	<!-- Other domain beans come here -->	
+	<bean id="boxSent" class="domain.Box">
+		<property name="name" value="Sent messages"/>
+		<property name="isSystem" value="true"/>
+		<property name="fatherBox" value=""/>
+		<property name="messages">
+			<list>
+
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="boxRecieved" class="domain.Box">
+		<property name="name" value="Received messages"/>
+		<property name="isSystem" value="true"/>
+		<property name="fatherBox" value=""/>
+		<property name="messages">
+			<list>
+
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="boxTrash" class="domain.Box">
+		<property name="name" value="Trash"/>
+		<property name="isSystem" value="true"/>
+		<property name="fatherBox" value=""/>
+		<property name="messages">
+			<list>
+
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="boxSpam" class="domain.Box">
+		<property name="name" value="Spam"/>
+		<property name="isSystem" value="true"/>
+				<property name="fatherBox" value=""/>
+		<property name="messages">
+			<list>
+
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="message1" class="domain.Message">
+		<property name="moment" value="11/11/2011 11:11"/>
+		<property name="subject" value="This is a sent message by HandyWorker1"/>
+		<property name="body" value="HandyWorkers rock."/>
+		<property name="priority" value="LOW"/>
+		<property name="tags">
+			<list>
+				<value>Tag de ejemplo 1</value>
+				<value>Tag de ejemplo 2</value>
+			</list>
+		</property>
+		<property name="sender">
+			<ref bean="handyWorker1"/>
+		</property>
+		<property name="receivers">
+			<list>
+				<ref bean="admin1" />
+				<ref bean="customer1" />
+			</list>
+		</property>			
+	</bean>
+	
+	<bean id="message2" class="domain.Message">
+		<property name="moment" value="11/12/2011 11:11"/>
+		<property name="subject" value="This is a sent message by Customer1"/>
+		<property name="body" value="Customers rule."/>
+		<property name="priority" value="NEUTRAL"/>
+		<property name="tags">
+			<list>
+				<value>Tag de ejemplo 3</value>
+				<value>Tag de ejemplo 4</value>
+			</list>
+		</property>
+		<property name="sender">
+			<ref bean="customer1"/>
+		</property>
+		<property name="receivers">
+			<list>
+				<ref bean="admin1" />
+				<ref bean="handyWorker1" />
+			</list>
+		</property>			
+	</bean>
+	
+	<bean id="message3" class="domain.Message">
+		<property name="moment" value="12/11/2011 11:11"/>
+		<property name="subject" value="This is a sent message by Admin1"/>
+		<property name="body" value="Would you please stop sending this stupid messages?"/>
+		<property name="priority" value="HIGH"/>
+		<property name="tags">
+			<list>
+				<value>Tag de ejemplo 5</value>
+				<value>Tag de ejemplo 6</value>
+			</list>
+		</property>
+		<property name="sender">
+			<ref bean="admin1"/>
+		</property>
+		<property name="receivers">
+			<list>
+				<ref bean="customer1" />
+				<ref bean="handyWorker1" />
+			</list>
+		</property>			
+	</bean>
+	
+	<bean id="message4" class="domain.Message">
+		<property name="moment" value="02/09/2013 11:11"/>
+		<property name="subject" value="This is a Spam message"/>
+		<property name="body" value="Banana Banana Banana Banana Banana Banana Banana Banana Banana Banana Banana Banana Banana Banana Banana Banana Banana Banana Banana Banana Banana Banana Banana Banana Banana Banana Banana Banana Banana Banana Banana Banana Banana Banana Banana Banana Banana Banana Banana Banana Banana Banana Banana Banana Banana Banana Banana Banana Banana Banana Banana Banana Banana Banana Banana Banana Banana Banana Banana Banana Banana Banana Banana Banana "/>
+		<property name="priority" value="LOW"/>
+		<property name="tags">
+			<list>
+				<value>Banana de ejemplo 7</value>
+				<value>Banana de ejemplo 8</value>
+			</list>
+		</property>
+		<property name="sender">
+			<ref bean="referee1"/>
+		</property>
+		<property name="receivers">
+			<list>
+				<ref bean="admin1" />
+				<ref bean="handyWorker1" />
+			</list>
+		</property>			
+	</bean>
+	
+	<bean id="message5" class="domain.Message">
+		<property name="moment" value="07/05/2018 11:11"/>
+		<property name="subject" value="This is a disposable message"/>
+		<property name="body" value="My willing to live."/>
+		<property name="priority" value="LOW"/>
+		<property name="tags">
+			<list>
+				<value>Are this really necessary?</value>
+				<value>DP is okay... I guess...</value>
+			</list>
+		</property>
+		<property name="sender">
+			<ref bean="handyWorker1"/>
+		</property>
+		<property name="receivers">
+			<list>
+				<ref bean="referee1" />
+				<ref bean="admin1" />
+			</list>
+		</property>			
+	</bean>
+	
+	<bean id="socialProfileAdmin1" class="domain.SocialProfile">
+		<property name="nick" value="Administrador1"/>
+		<property name="name" value="Paco"/>
+		<property name="profileLink" value="www.example1.com"/>
+	</bean>
+	
+	<bean id="socialProfileCustomer1" class="domain.SocialProfile">
+		<property name="nick" value="Customer1"/>
+		<property name="name" value="Pepe"/>
+		<property name="profileLink" value="www.example2.com"/>
+	</bean>
+	
+	<bean id="socialProfileReferee1" class="domain.SocialProfile">
+		<property name="nick" value="Referee1"/>
+		<property name="name" value="Walabonso"/>
+		<property name="profileLink" value="www.example3.com"/>
+	</bean>
+	
+	<bean id="socialProfileHandyWorker1" class="domain.SocialProfile">
+		<property name="nick" value="HandyWorker1"/>
+		<property name="name" value="Eustaquio"/>
+		<property name="profileLink" value="www.example4.com"/>
+	</bean>
+	
+
 	
 </beans>
