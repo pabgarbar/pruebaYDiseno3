@@ -3,15 +3,19 @@ package domain;
 
 import java.util.List;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.URL;
 
 @Entity
-public class Section {
+@Access(AccessType.PROPERTY)
+public class Section extends DomainEntity {
 
 	private String			sectionTitle;
 	private String			text;
@@ -37,7 +41,7 @@ public class Section {
 		this.text = text;
 	}
 
-	@URL
+	@ElementCollection(targetClass = String.class)
 	public List<String> getSectionPictures() {
 		return this.sectionPictures;
 	}
@@ -48,6 +52,7 @@ public class Section {
 
 	@Min(0)
 	@NotNull
+	@Column(unique = true)
 	public int getNumber() {
 		return this.number;
 	}

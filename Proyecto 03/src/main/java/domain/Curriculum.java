@@ -3,12 +3,19 @@ package domain;
 
 import java.util.List;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
+@Access(AccessType.PROPERTY)
 public class Curriculum extends DomainEntity {
 
 	private String						ticker;
@@ -23,7 +30,7 @@ public class Curriculum extends DomainEntity {
 	public Curriculum() {		//Created for Json purposes
 		super();
 	}
-
+	@Column(unique = true)
 	@NotBlank
 	public String getTicker() {
 		return this.ticker;
@@ -33,6 +40,7 @@ public class Curriculum extends DomainEntity {
 		this.ticker = ticker;
 	}
 
+	@OneToMany(cascade = CascadeType.ALL)
 	@Valid
 	public List<EndorserRecord> getEndorserRecords() {
 		return this.endorserRecords;
@@ -42,6 +50,7 @@ public class Curriculum extends DomainEntity {
 		this.endorserRecords = endorserRecords;
 	}
 
+	@OneToMany(cascade = CascadeType.ALL)
 	@Valid
 	public List<MiscellaneousRecord> getMiscellaneousRecords() {
 		return this.miscellaneousRecords;
@@ -51,6 +60,7 @@ public class Curriculum extends DomainEntity {
 		this.miscellaneousRecords = miscellaneousRecords;
 	}
 
+	@OneToMany(cascade = CascadeType.ALL)
 	@Valid
 	public List<EducationRecord> getEducationRecords() {
 		return this.educationRecords;
@@ -60,6 +70,7 @@ public class Curriculum extends DomainEntity {
 		this.educationRecords = educationRecords;
 	}
 
+	@OneToMany(cascade = CascadeType.ALL)
 	@Valid
 	public List<ProfessionalRecord> getProfessionalRecords() {
 		return this.professionalRecords;
@@ -69,6 +80,7 @@ public class Curriculum extends DomainEntity {
 		this.professionalRecords = professionalRecords;
 	}
 
+	@OneToOne(cascade = CascadeType.ALL)
 	@NotBlank
 	public PersonalRecord getPersonalRecord() {
 		return this.personalRecord;

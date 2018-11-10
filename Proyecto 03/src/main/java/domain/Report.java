@@ -4,7 +4,14 @@ package domain;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
@@ -12,6 +19,7 @@ import javax.validation.constraints.Past;
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
+@Access(AccessType.PROPERTY)
 public class Report extends DomainEntity {
 
 	private Date			moment;
@@ -22,6 +30,8 @@ public class Report extends DomainEntity {
 
 
 	@Valid
+	@OneToMany(cascade = CascadeType.ALL)
+	@ElementCollection(targetClass = Note.class)
 	public List<Note> getNotes() {
 		return this.notes;
 	}
@@ -32,6 +42,7 @@ public class Report extends DomainEntity {
 
 	@NotNull
 	@Past
+	@Temporal(TemporalType.TIMESTAMP)
 	public Date getMoment() {
 		return this.moment;
 	}
@@ -50,6 +61,7 @@ public class Report extends DomainEntity {
 	}
 
 	@Valid
+	@ElementCollection(targetClass = String.class)
 	public List<String> getAttachments() {
 		return this.attachments;
 	}

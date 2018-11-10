@@ -4,7 +4,12 @@ package domain;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
@@ -14,11 +19,12 @@ import javax.validation.constraints.Past;
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
-public class Finder {
+@Access(AccessType.PROPERTY)
+public class Finder extends DomainEntity {
 
 	private String			keyWord;
-	private Category		category;
-	private Warranty		warranty;
+	private String			category;
+	private String			warranty;
 	private double			minPrice;
 	private double			maxPrice;
 	private Date			startDate;
@@ -35,7 +41,7 @@ public class Finder {
 	public void setKeyWord(final String keyWord) {
 		this.keyWord = keyWord;
 	}
-
+	@OneToMany
 	@Valid
 	public List<FixUpTask> getFixUpTasks() {
 		return this.fixUpTasks;
@@ -46,20 +52,20 @@ public class Finder {
 	}
 
 	@NotNull
-	public Category getCategory() {
+	public String getCategory() {
 		return this.category;
 	}
 
-	public void setCategory(final Category category) {
+	public void setCategory(final String category) {
 		this.category = category;
 	}
 
 	@NotNull
-	public Warranty getWarranty() {
+	public String getWarranty() {
 		return this.warranty;
 	}
 
-	public void setWarranty(final Warranty warranty) {
+	public void setWarranty(final String warranty) {
 		this.warranty = warranty;
 	}
 
@@ -87,6 +93,7 @@ public class Finder {
 
 	@Past
 	@NotNull
+	@Temporal(TemporalType.TIMESTAMP)
 	public Date getStartDate() {
 		return this.startDate;
 	}
@@ -94,7 +101,7 @@ public class Finder {
 	public void setStartDate(final Date startDate) {
 		this.startDate = startDate;
 	}
-
+	@Temporal(TemporalType.TIMESTAMP)
 	@NotNull
 	public Date getEndDate() {
 		return this.endDate;
