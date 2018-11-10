@@ -59,6 +59,7 @@
 	
 	<!-- Other domain beans come here -->	
 	
+
 	<!-- BOX   -->
 	<bean id="boxSent" class="domain.Box">
 		<property name="name" value="Sent messages"/>
